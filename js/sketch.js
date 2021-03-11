@@ -10,13 +10,14 @@ let dImg; // dinossauro
 let cImg; // cactus
 let bImg; // background
 
-function preload() {
-    dImg =  loadImage('img/dino.png');
-    cImg =  loadImage('img/cactus.png');
-    bImg =  loadImage('img/background.png');
+//optei por utilizar minha função preload ao invés do P5
+function myPreload() {
+    dImg =  myLoadImage('img/dino.png');
+    cImg =  myLoadImage('img/cactus.png');
+    bImg =  myLoadImage('img/background.png');
 }
 
-function loadImage(url) {
+function myLoadImage(url) {
     var img = new Image();
     img.src = url;
     return img;
@@ -37,9 +38,11 @@ class Canvas {
     }
 
     background(bkg) {
-        // estudar como mudar a imagem do do objecto com javascript
         this.canvas.style.background=bkg;
         //this.canvas.style.background='url(img/background.png)';
+        this.canvas.style.backgroundPosition='center bottom';
+        this.canvas.style.backgroundRepeat='no-repeat';
+        //this.canvas.style.backgroundSize='cover';
     }
 
     rectangle(x1, y1, w1, h1) {
@@ -50,9 +53,14 @@ class Canvas {
         this.ctx.drawImage(img, x2, y2, w2, h2);
     }
 
+    keyEvent(){
+        
+    }
+
 }
 
 function setup() {
+    // inicializo as variáveis width e height
     width = 600;
     height = 350;
 
@@ -60,28 +68,38 @@ function setup() {
     dino = new Dino();
     canvas = new Canvas();
 
-    preload();
+    // carrego as imagens do jogo
+    myPreload();
 
+    // inicializo a criação do canvas
     canvas.createCanvas(width, height);
     canvas.background('#A6A6A6');
-    //canvas.background(bImg);
-    console.log(bImg);
 
+    // inicializo o Dino
     dino.show();
+    dino.move();
 }
 
-function rect(x1, y1, w1, h1) {
+function myRect(x1, y1, w1, h1) {
     canvas.rectangle(x1, y1, w1, h1);   
 }
 
-function image(img, x1, y1, w1, h1) {
+function myImage(img, x1, y1, w1, h1) {
     //verifica se a imagem foi carregada antes de executar a função
     img.onload = function() {
         canvas.image(img, x1, y1, w1, h1);
     }
 }
 
+canvas.addEventListener('keypress', function(evento) {
+    console.log('passou aqui');
+    if (evento.keyCode == 32) {
+        console.log('barra espaço');
+    }
+})
+
 function keyPressed() {
+    
     if (key == " ") {
         dino.jump();
     }
