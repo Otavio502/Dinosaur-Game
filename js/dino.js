@@ -7,18 +7,19 @@ class Dino {
         this.gravity = 2;
     }
 
-    // jump() {
-    //     this.vy = -25;
-    // }
+    jump() {
+        this.vy = -25;
+        console.log('jump');
+    }
 
-    // move() {
-    //     this.y += this.vy;
-    //     this.vy += this.gravity;
-    //     this.y = constrain(this.y, 0, height - this.r); // Limitar o valor de y entre 0 e altura - menos tamanho objeto
-    // }
+    move() {
+        this.y += this.vy;
+        this.vy += this.gravity;
+        //this.y = constrain(this.y, 0, height - this.r); // Limitar o valor de y entre 0 e altura - menos tamanho objeto
+    }
 
     show() {
-        //rect(this.x, this.y, this.r, this.r);
-        image(dImg, this.x, this.y, this.r, this.r);
+        //myRect(this.x, this.y, this.r, this.r);
+        myImage(dImg, this.x, this.y, this.r, this.r);
     }
 }
