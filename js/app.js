@@ -4,6 +4,7 @@
     Project Started: 05/03/2021
     Version: 0.1-03.21
 */
+/* Arquivo Código antigo */
 
 const dino = document.getElementById("dino");
 const cactus = document.getElementById("cactus");
