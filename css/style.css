@@ -1,3 +1,21 @@
+/*
+ps: 09/03/2021 (d/m/y)
+reinicializo os espaços para 0 no Html e Body
+inicializo o canvas para ser trabalhado pelo JS
+*/
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: gray;
+  }
+  canvas {
+    display: block;
+  }
+
+  
+/* código antigo
+
 .game {
     width: 600px;
     height: 200px;
@@ -8,7 +26,6 @@
 #dino {
     width: 50px;
     height: 50px;
-    /*background-color: black;*/
     background-image: url(../img/dino.png);
     background-size: 50px 50px;
 
@@ -20,7 +37,7 @@
     animation: jump 0.3s linear;
 }
 
-/*Animations*/
+
 @keyframes jump {
     0% {
         top: 150px;
@@ -50,7 +67,6 @@
     top: 110px;
     left: 580px;
 
-    /* background-color: black; */
     background-image: url(../img/cactus.png);
     background-size: 20px 40px;
 
@@ -66,3 +82,4 @@
         left: 0px;
     }
 }
+*/
