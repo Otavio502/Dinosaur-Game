@@ -51,21 +51,16 @@ class Canvas {
 
     image(img, x2, y2, w2, h2) {        
         this.ctx.drawImage(img, x2, y2, w2, h2);
-    }
-
-    keyEvent(){
-        
-    }
+    }     
 
 }
+
 
 function setup() {
     // inicializo as variáveis width e height
     width = 600;
     height = 350;
-
-
-    dino = new Dino();
+    
     canvas = new Canvas();
 
     // carrego as imagens do jogo
@@ -76,8 +71,7 @@ function setup() {
     canvas.background('#A6A6A6');
 
     // inicializo o Dino
-    dino.show();
-    dino.move();
+    dinoDraw();
 }
 
 function myRect(x1, y1, w1, h1) {
@@ -91,29 +85,49 @@ function myImage(img, x1, y1, w1, h1) {
     }
 }
 
-canvas.addEventListener('keypress', function(evento) {
-    console.log('passou aqui');
-    if (evento.keyCode == 32) {
-        console.log('barra espaço');
-    }
-})
+function dinoDraw() {
+    dino = new Dino();
 
-function keyPressed() {
-    
-    if (key == " ") {
-        dino.jump();
-    }
+    dino.show();
+    dino.move();
 }
 
-// function draw() {
+
+window.addEventListener('keypress', function(evento) {
+
+    // if (evento.code == "Space") {
+    //     console.log('barra espaço');
+    // }
+
+    if (evento.defaultPrevented) {
+        return; // Não fazer nada se o evento estiver iniciado
+    }
+
+    switch(evento.code) {
+        case "Space":
+        case "ArrowUp":
+          // Aciona o salto do Dino
+          dino.jump();
+          dinoDraw();
+          break;
+        case "KeyA":
+        case "ArrowLeft":
+          // volta para esquerda
+          // função aqui
+          break;
+        case "KeyD":
+        case "ArrowRight":
+          // avança para a direita
+          // função aqui
+          break;
+      }
+
+      dino.show();
     
-//     background(220);
-//     // background(bImg);
-//     dino.show();
-//     dino.move();
-
-// }
-
-
+      // retirar o evento se ele for tratado duas vezes
+      evento.preventDefault();
+    
+    }, true);
+    
 
 setup();
