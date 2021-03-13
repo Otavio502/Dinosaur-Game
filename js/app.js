@@ -27,28 +27,23 @@ let gravity;
 let obstacles = [];
 let gameSpeed;
 let keys = {};
-let imgGame = []; // lista imagens do jogo
+
+let img;
+let dImg; // dinossauro
+let cImg; // cactus
+let bImg; // background
 
 // Preload  Images
-function preload() {
-    loadImage('img/dino.png'); // 0 - dino
-    loadImage('img/cactus.png'); // 1 - cactus
-    loadImage('img/background.png'); // 2 - background
+function myPreload() {
+    dImg =  myLoadImage('img/dino.png');
+    cImg =  myLoadImage('img/cactus.png');
+    bImg =  myLoadImage('img/background.png');
 }
 
-function loadImage(url) {
+function myLoadImage(url) {
     var img = new Image();
     img.src = url;
-    img.onload = function() {
-        imgGame.push(img);
-        //console.log(imgGame[2]);          
-    }
-}
-
-function testImage() {
-    for(i=0; i < imgGame.length; i++) {
-        console.log(imgGame[i]);
-    }
+    return img;
 }
 /**/
 
@@ -61,12 +56,12 @@ document.addEventListener('keyup', function (evt) {
 });
 
 class Player {
-    constructor (x, y, w, h, ci) {
+    constructor (x, y, w, h) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.ci = ci; // color-image
+        this.c = "#FF5858";
 
         this.dy = 0;
         this.jumpForce = 15;
@@ -75,7 +70,7 @@ class Player {
         this.jumpTimer = 0;
     }
 
-    animate() {
+    animate(img) {
         // Jump
         if (keys['Space'] || keys['KeyW']) {
             this.jump();
@@ -102,8 +97,8 @@ class Player {
             this.y = canvas.height - this.h;
         }
             
-        this.draw(); // geometric form
-        //this.image();
+        // this.draw(); // geometric form
+        this.image(img);
     }
 
     jump(){
@@ -118,16 +113,15 @@ class Player {
 
     draw () {
         ctx.beginPath();
-        ctx.fillStyle = this.ci;
+        ctx.fillStyle = this.c;
         ctx.fillRect(this.x, this.y, this.w, this.h);
         ctx.closePath();
     }
 
-    image() {
-        //verifica se a imagem foi carregada antes de executar a função
-        ci.onload = function() {
-            ctx.drawImage(this.ci, this.x, this.y, this.w, this.h);
-        }
+    image(img) {
+        ctx.beginPath();
+        ctx.drawImage(img, this.x, this.y, this.w, this.h);
+        ctx.closePath();
     }
 }
 
@@ -209,8 +203,8 @@ function start () {
         highscore = localStorage.getItem('highscore');
     }
 
-    player = new Player(25, canvas.height - 50, 50, 50, '#FF5858');
-    //player = new Player(25, canvas.height - 50, 50, 50, dImg);
+    //player = new Player(25, canvas.height - 50, 50, 50);
+    player = new Player(25, canvas.height - 50, 50, 50);
 
     scoreText = new Text("Score: " + score, 25, 25, "left", "#212121", "20");
     highscoreText = new Text("Highscore: " + highscore, canvas.width - 25, 25, "right", "#212121", "20");
@@ -218,8 +212,7 @@ function start () {
     requestAnimationFrame(update);
 
     // carrego as imagens do jogo
-    preload();
-    testImage();
+    myPreload();
 }
 
 let initialSpawnTimer = 200;
@@ -264,7 +257,7 @@ function update() {
         o.update();
   }
 
-    player.animate();
+    player.animate(dImg);
 
     score++;
     scoreText.t = "Score: " + score;
