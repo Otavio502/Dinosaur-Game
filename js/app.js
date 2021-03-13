@@ -15,7 +15,7 @@ canvas.style.height = "";
 canvas.style.width = "";
 canvas.setAttribute('width', 600);
 canvas.setAttribute('height', 350);  
-
+/**/
 
 // Variables
 let score;
@@ -27,6 +27,30 @@ let gravity;
 let obstacles = [];
 let gameSpeed;
 let keys = {};
+let imgGame = []; // lista imagens do jogo
+
+// Preload  Images
+function preload() {
+    loadImage('img/dino.png'); // 0 - dino
+    loadImage('img/cactus.png'); // 1 - cactus
+    loadImage('img/background.png'); // 2 - background
+}
+
+function loadImage(url) {
+    var img = new Image();
+    img.src = url;
+    img.onload = function() {
+        imgGame.push(img);
+        //console.log(imgGame[2]);          
+    }
+}
+
+function testImage() {
+    for(i=0; i < imgGame.length; i++) {
+        console.log(imgGame[i]);
+    }
+}
+/**/
 
 // Event Listeners
 document.addEventListener('keydown', function (evt) {
@@ -37,12 +61,12 @@ document.addEventListener('keyup', function (evt) {
 });
 
 class Player {
-    constructor (x, y, w, h, c) {
+    constructor (x, y, w, h, ci) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.c = c;
+        this.ci = ci; // color-image
 
         this.dy = 0;
         this.jumpForce = 15;
@@ -77,8 +101,9 @@ class Player {
             this.grounded = true;
             this.y = canvas.height - this.h;
         }
-    
-        this.draw();
+            
+        this.draw(); // geometric form
+        //this.image();
     }
 
     jump(){
@@ -93,10 +118,17 @@ class Player {
 
     draw () {
         ctx.beginPath();
-        ctx.fillStyle = this.c;
+        ctx.fillStyle = this.ci;
         ctx.fillRect(this.x, this.y, this.w, this.h);
         ctx.closePath();
-      }
+    }
+
+    image() {
+        //verifica se a imagem foi carregada antes de executar a função
+        ci.onload = function() {
+            ctx.drawImage(this.ci, this.x, this.y, this.w, this.h);
+        }
+    }
 }
 
 class Obstacle {
@@ -110,13 +142,13 @@ class Obstacle {
         this.dx = -gameSpeed;
     }
 
-    Update () {
+    update () {
         this.x += this.dx;
-        this.Draw();
+        this.draw();
         this.dx = -gameSpeed;
     }
     
-     Draw () {
+     draw () {
         ctx.beginPath();
         ctx.fillStyle = this.c;
         ctx.fillRect(this.x, this.y, this.w, this.h);
@@ -134,7 +166,7 @@ class Text {
         this.s = s; // size
     }
   
-    Draw () {
+    draw () {
         ctx.beginPath();
         ctx.fillStyle = this.c;
         ctx.font = this.s + "px sans-serif";
@@ -173,10 +205,21 @@ function start () {
 
     score = 0;
     highscore = 0;
+    if (localStorage.getItem('highscore')) {
+        highscore = localStorage.getItem('highscore');
+    }
 
     player = new Player(25, canvas.height - 50, 50, 50, '#FF5858');
+    //player = new Player(25, canvas.height - 50, 50, 50, dImg);
+
+    scoreText = new Text("Score: " + score, 25, 25, "left", "#212121", "20");
+    highscoreText = new Text("Highscore: " + highscore, canvas.width - 25, 25, "right", "#212121", "20");
     
     requestAnimationFrame(update);
+
+    // carrego as imagens do jogo
+    preload();
+    testImage();
 }
 
 let initialSpawnTimer = 200;
@@ -218,12 +261,23 @@ function update() {
             window.localStorage.setItem('highscore', highscore);
         }
         
-        o.Update();
+        o.update();
   }
 
     player.animate();
 
     score++;
+    scoreText.t = "Score: " + score;
+    scoreText.draw();
+
+    if (score > highscore) {
+        highscore = score;
+        highscoreText.t = "Highscore: " + highscore;
+      }
+      
+      highscoreText.draw();
+
+      gameSpeed += 0.003;
 }
 
 start();
