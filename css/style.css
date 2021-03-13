@@ -8,11 +8,12 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: gray;
-  }
-  canvas {
-    display: block;
-  }
+}
 
+canvas {
+    display: block;
+    background-color: #A6A6A6;
+}
   
 /* código antigo
 
