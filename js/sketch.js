@@ -51,17 +51,27 @@ class Canvas {
 
     image(img, x2, y2, w2, h2) {        
         this.ctx.drawImage(img, x2, y2, w2, h2);
-    }     
+    }
+    
+    clearRectangle(x1, y1, w1, h1) {        
+        this.ctx.clearRect(x1, y1, w1, h1);
+    }
+
+    updateImage(img, x2, y2, w2, h2) {        
+        this.ctx.drawImage(img, x2, y2, w2, h2);
+    }
 
 }
 
 
-function setup() {
+function mySetup() {
     // inicializo as variáveis width e height
     width = 600;
     height = 350;
     
     canvas = new Canvas();
+    dino = new Dino();
+
 
     // carrego as imagens do jogo
     myPreload();
@@ -78,6 +88,10 @@ function myRect(x1, y1, w1, h1) {
     canvas.rectangle(x1, y1, w1, h1);   
 }
 
+function myClearRect(x1, y1, w1, h1) {
+    canvas.clearRectangle(x1, y1, w1, h1);   
+}
+
 function myImage(img, x1, y1, w1, h1) {
     //verifica se a imagem foi carregada antes de executar a função
     img.onload = function() {
@@ -86,8 +100,6 @@ function myImage(img, x1, y1, w1, h1) {
 }
 
 function dinoDraw() {
-    dino = new Dino();
-
     dino.show();
     dino.move();
 }
@@ -97,6 +109,8 @@ window.addEventListener('keypress', function(evento) {
 
     // if (evento.code == "Space") {
     //     console.log('barra espaço');
+    //     dino.jump();
+    //     dinoDraw();
     // }
 
     if (evento.defaultPrevented) {
@@ -108,7 +122,6 @@ window.addEventListener('keypress', function(evento) {
         case "ArrowUp":
           // Aciona o salto do Dino
           dino.jump();
-          dinoDraw();
           break;
         case "KeyA":
         case "ArrowLeft":
@@ -122,7 +135,7 @@ window.addEventListener('keypress', function(evento) {
           break;
       }
 
-      dino.show();
+      dinoDraw();
     
       // retirar o evento se ele for tratado duas vezes
       evento.preventDefault();
@@ -130,4 +143,4 @@ window.addEventListener('keypress', function(evento) {
     }, true);
     
 
-setup();
+mySetup();
