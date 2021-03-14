@@ -203,7 +203,6 @@ function start () {
         highscore = localStorage.getItem('highscore');
     }
 
-    //player = new Player(25, canvas.height - 50, 50, 50);
     player = new Player(25, canvas.height - 50, 50, 50);
 
     scoreText = new Text("Score: " + score, 25, 25, "left", "#212121", "20");
@@ -274,6 +273,25 @@ function update() {
 }
 
 start();
+
+// comparação da função requestAnimationFrame e setInterval
+// info sobre requestAnimationFrame
+// http://www.javascriptkit.com/javatutors/requestanimationframe.shtml
+
+// var adiv = document.getElementById('mydiv')
+// var leftpos = 0
+// setInterval(function(){
+//     leftpos += 5
+//     adiv.style.left = leftpos + 'px' // move div by 5 pixels each time
+// }, 50) // run code every 50 milliseconds
+
+// var adiv = document.getElementById('mydiv')
+// var leftpos = 0
+// requestAnimationFrame(function(timestamp){
+//     leftpos += 5
+//     adiv.style.left = leftpos + 'px'
+// })
+
 
 // 2ª Construção
 
