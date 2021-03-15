@@ -2,7 +2,7 @@
     App Dinosaur Game
     By iMarcaos 
     Project Started: 05/03/2021
-    Version: 0.2-03.21
+    Version: 0.3-03.21
 */
 
 // 3ª Construção
@@ -37,6 +37,7 @@ let bImg; // background
 // Preload  Images
 function myPreload() {
     dImg =  myLoadImage('img/dino.png');
+    fImg =  myLoadImage('img/dino-fly.png');
     cImg =  myLoadImage('img/cactus.png');
     bImg =  myLoadImage('img/background.png');
 }
@@ -262,7 +263,7 @@ function update() {
             window.localStorage.setItem('highscore', highscore);
         }
         if (type == 1) {
-            o.update(dImg); // callback function update on the class Obstacle
+            o.update(fImg); // callback function update on the class Obstacle
         } else {
             o.update(cImg);
         }
