@@ -8,12 +8,12 @@ JavaScript - Html - CSS
 <p>O projeto <strong>Dinosaur Game</strong> está a ser desenvolvido com o objetivo de estudo e prática em javascript, css e html.</p>
 
 <p>O projeto inicial comecei a utilizar o código apenas em html, css e javascript, sendo boa parte da engine do game feita por css qual se afastava do meu âmbito de estudo que é ganhar mais conhecimento em JavaScript, procurei por vários códigos para tomar por base visto não ter tanto conhecimento neste tipo de programação. Depois de testar e estudar vários códigos encontrei um com uma boa explicação programado em javascript e utilizando canvas.
-Vou deixar as ligações do seu criador, o meu código foi escrito acompanhando o vídeo para que eu pudesse perceber melhor suas programação, logo optei por não copiar do GitHub.
+Vou deixar as ligações do seu criador, o meu código foi escrito acompanhando o vídeo para que eu pudesse perceber melhor suas programação, logo optei por não copiar do GitHub.</p>
 
-Vídeo com a explicação da construção do código: https://www.youtube.com/watch?v=LprJOTU37hk</br>
+<p>Vídeo com a explicação da construção do código: https://www.youtube.com/watch?v=LprJOTU37hk</p>
 <p>GitHub com o código original: https://github.com/TylerPottsDev/chrome-dino-replica</p>
 
-Na primeira fase do projeto irei colocar o Dinossauro fixo no canto da tela a saltar os obstáculos (cactos) com o fundo de tela branco, caso esbarre em um cacto apresentará uma mensagem de game over na tela.</p>
+<p>Na primeira fase do projeto irei colocar o Dinossauro fixo no canto da tela a saltar os obstáculos (cactos) com o fundo de tela branco, caso esbarre em um cacto apresentará uma mensagem de game over na tela.</p>
 <p>Com o desenvolvimento pretendo acrescentar outras funcionalidades, fundos, mais obstáculos e talves níveis.<p>
 
 ***
