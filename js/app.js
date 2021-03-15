@@ -27,6 +27,7 @@ let gravity;
 let obstacles = [];
 let gameSpeed;
 let keys = {};
+let type;
 
 let img;
 let dImg; // dinossauro
@@ -180,12 +181,12 @@ class Text {
 // Game Functions
 function spawnObstacle () {
     let size = randomIntInRange(20, 70); // size of obstacle
-    let type = randomIntInRange(0, 1); // 0- large obstacle and 1- fly obstacle
+    type = randomIntInRange(0, 1); // 0- large obstacle and 1- fly obstacle
     let obstacle = new Obstacle(canvas.width + size, canvas.height - size, size, size);
     //console.log(size);
   
     if (type == 1) {
-      obstacle.y -= player.originalHeight - 10; // fly obstacle height
+      obstacle.y -= player.originalHeight - 10; // fly obstacle height      
     }
     obstacles.push(obstacle); // push the obtacles to the array    
 }
@@ -231,7 +232,7 @@ function update() {
     spawnTimer--;
     if (spawnTimer <= 0) {
         spawnObstacle();
-        console.log(obstacles);
+        //console.log(obstacles);
         spawnTimer = initialSpawnTimer - gameSpeed * 8;
         
         if (spawnTimer < 60) {
@@ -260,8 +261,11 @@ function update() {
             gameSpeed = 3;
             window.localStorage.setItem('highscore', highscore);
         }
-        
-        o.update(cImg); // callback function update on the class Obstacle
+        if (type == 1) {
+            o.update(dImg); // callback function update on the class Obstacle
+        } else {
+            o.update(cImg);
+        }
   }
 
     player.animate(dImg);
