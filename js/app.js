@@ -126,26 +126,33 @@ class Player {
 }
 
 class Obstacle {
-    constructor (x, y, w, h, c) {
+    constructor (x, y, w, h) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.c = c;
+        this.c = "#2484E4";
     
         this.dx = -gameSpeed;
     }
 
-    update () {
+    update (img) {
         this.x += this.dx;
-        this.draw();
+        //this.draw();
+        this.image(img); // test with image 15/03/2021
         this.dx = -gameSpeed;
     }
     
-     draw () {
+    draw () {
         ctx.beginPath();
         ctx.fillStyle = this.c;
         ctx.fillRect(this.x, this.y, this.w, this.h);
+        ctx.closePath();
+    }
+
+    image(img) {
+        ctx.beginPath();
+        ctx.drawImage(img, this.x, this.y, this.w, this.h);
         ctx.closePath();
     }
 }
@@ -172,15 +179,15 @@ class Text {
 
 // Game Functions
 function spawnObstacle () {
-    let size = randomIntInRange(20, 70);
-    let type = randomIntInRange(0, 1);
-    let obstacle = new Obstacle(canvas.width + size, canvas.height - size, size, size, '#2484E4');
+    let size = randomIntInRange(20, 70); // size of obstacle
+    let type = randomIntInRange(0, 1); // 0- large obstacle and 1- fly obstacle
+    let obstacle = new Obstacle(canvas.width + size, canvas.height - size, size, size);
     //console.log(size);
   
     if (type == 1) {
-      obstacle.y -= player.originalHeight - 10;
+      obstacle.y -= player.originalHeight - 10; // fly obstacle height
     }
-    obstacles.push(obstacle);
+    obstacles.push(obstacle); // push the obtacles to the array    
 }
 //spawnObstacle();
 
@@ -240,6 +247,7 @@ function update() {
             obstacles.splice(i, 1);
         }
 
+        // if the player touch the obstacles, they will be restarted
         if (
             player.x < o.x + o.w &&
             player.x + player.w > o.x &&
@@ -253,7 +261,7 @@ function update() {
             window.localStorage.setItem('highscore', highscore);
         }
         
-        o.update();
+        o.update(cImg); // callback function update on the class Obstacle
   }
 
     player.animate(dImg);
@@ -274,143 +282,4 @@ function update() {
 
 start();
 
-// comparação da função requestAnimationFrame e setInterval
-// info sobre requestAnimationFrame
-// http://www.javascriptkit.com/javatutors/requestanimationframe.shtml
 
-// var adiv = document.getElementById('mydiv')
-// var leftpos = 0
-// setInterval(function(){
-//     leftpos += 5
-//     adiv.style.left = leftpos + 'px' // move div by 5 pixels each time
-// }, 50) // run code every 50 milliseconds
-
-// var adiv = document.getElementById('mydiv')
-// var leftpos = 0
-// requestAnimationFrame(function(timestamp){
-//     leftpos += 5
-//     adiv.style.left = leftpos + 'px'
-// })
-
-
-// 2ª Construção
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const dino = document.querySelector('.dino');
-//     const game = document.querySelector('.game');
-//     const alert =  document.getElementById('alert');
-//     let isJumping = false;
-//     let gravity = 0.9;
-//     let isGameOver = false;
-//     console.log(dino);
-
-//     function control(e) {
-//         if (e.code == 'Space') {
-//             if (!isJumping) {
-//                 isJumping = true;
-//                 jump();
-//             }            
-//         }
-//     }
-//     document.addEventListener('keypress', control);
-
-//     let position = 0;
-//     function jump() {
-//         let count = 0;
-//         let position = 0;
-//         let timerId = setInterval(() => {
-
-//             // move down
-//             if (count === 15){
-//                 clearInterval(timerId);
-//                 console.log('down');
-//                 let downTimeId = setInterval(() => {
-//                     if (count === 0) {
-//                         clearInterval(downTimeId);
-//                         isJumping = false;
-//                     }
-//                     position -= 5; //velocity
-//                     count --;
-//                     position = position * gravity;
-//                     dino.style.bottom = position + 'px';                    
-//                 }, 20);
-//             }
-
-//             // move up
-//             console.log('up');            
-//             position += 30;
-//             count ++;
-//             position = position * gravity;
-//             dino.style.bottom = position + 'px';
-//             console.log(dino.style.bottom);
-            
-//         }, 20);
-//     }
-
-//     function generateObstacles() {
-//         let randomTime = Math.random() * 4000;
-//         let obstaclePosition = 1000;
-//         const obstacle = document.createElement('div');
-//         if (!isGameOver) obstacle.classList.add('obstacle');
-//         game.appendChild(obstacle);
-//         obstacle.style.left = obstaclePosition + 'px';
-
-//         let timerId = setInterval(() => {
-//             if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60) {
-//                 clearInterval(timerId);
-//                 alert.innerHTML = 'Game Over';
-//                 isGameOver = true;
-//                 // Remove all children
-//                 while (game.firstChild) {
-//                     game.removeChild(game.lastChild)
-//                 }
-//             }
-//             obstaclePosition -= 10;
-//             obstacle.style.left = obstaclePosition + 'px';
-//         }, 20);
-//         if (!isGameOver) setTimeout(generateObstacles, randomTime);
-
-//     }
-//     generateObstacles();
-
-
-// })
-
-// 1ª Construção
-
-// const dino = document.getElementById("dino");
-// const cactus = document.getElementById("cactus");
-
-// function jump() {
-//     dino.classList.add("jump");
-    
-//      setTimeout(function() {
-//         dino.classList.remove("jump");
-//     }, 300);
-// }
-
-// let isAlive = setInterval(function() {
-    
-//     //console.log("check");
-    
-//     // get current dino Y position
-//     let dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
-//     //console.log(dinoTop);
-
-//     // get current cactus X position
-//     let cactusLeft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left"));
-//     //console.log(cactusLeft);
-
-//     // detect collision
-//     /* Vamos checar a posição do dinossauro que é fixa no momento (HeightXWidhtXPosition-40X20X0) e comparar com a posição e altura do cactus */
-//     if (cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140) {
-//         // collision
-
-//         //console.log("collision");
-//         alert("Game Over");
-
-//     }
-
-// }, 10);
-
-// document.addEventListener("keydown", function (event){ jump(); });
