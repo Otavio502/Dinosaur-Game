@@ -16,7 +16,7 @@ Vou deixar as ligações do seu criador, o meu código foi escrito acompanhando 
 <p>Na primeira fase do projeto irei colocar o Dinossauro fixo no canto da tela a saltar os obstáculos (cactos) com o fundo de tela branco, caso esbarre em um cacto apresentará uma mensagem de game over na tela.</p>
 <p>Com o desenvolvimento pretendo acrescentar outras funcionalidades, fundos, mais obstáculos e talves níveis.<p>
 
-###Comandos do jogo
+### Comandos do jogo
 - Saltar  - W e Barra de Espaço
 - Abaixar - S
 
