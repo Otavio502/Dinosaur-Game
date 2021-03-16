@@ -16,6 +16,10 @@ Vou deixar as ligações do seu criador, o meu código foi escrito acompanhando 
 <p>Na primeira fase do projeto irei colocar o Dinossauro fixo no canto da tela a saltar os obstáculos (cactos) com o fundo de tela branco, caso esbarre em um cacto apresentará uma mensagem de game over na tela.</p>
 <p>Com o desenvolvimento pretendo acrescentar outras funcionalidades, fundos, mais obstáculos e talves níveis.<p>
 
+###Comandos do jogo
+- Saltar  - W e Barra de Espaço
+- Abaixar - S
+
 ***
 ### Observação
  <p>Optei por classificar por versões, conforme fizer acréscimos de funções ou melhorias significativas no código. Exemplo: 0.1-08.20, sendo o 0.1 a versão e 08.20 o mês 08 e ano 2020 .<p>
