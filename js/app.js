@@ -5,8 +5,6 @@
     Version: 0.3-03.21
 */
 
-// 3ª Construção
-
 // Canvas
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
@@ -286,5 +284,3 @@ function update() {
 }
 
 start();
-
-
