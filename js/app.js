@@ -2,7 +2,7 @@
     App Dinosaur Game
     By iMarcaos 
     Project Started: 05/03/2021
-    Version: 0.3-03.21
+    Version: 0.4-03.21
 */
 
 // Canvas
@@ -26,6 +26,8 @@ let obstacles = [];
 let gameSpeed;
 let keys = {};
 let type;
+let jumpPlayer = false;
+let downPlayer = false;
 
 let img;
 let dImg; // dinossauro
@@ -47,13 +49,45 @@ function myLoadImage(url) {
 }
 /**/
 
-// Event Listeners
+// Event Keys
 document.addEventListener('keydown', function (evt) {
     keys[evt.code] = true;
 });
 document.addEventListener('keyup', function (evt) {
     keys[evt.code] = false;
 });
+
+// Event Mouse and Touch Mobo
+let btnJumpPlayer = document.getElementById("jumpPlayer");
+let btnDownPlayer = document.getElementById("downPlayer");
+
+btnJumpPlayer.onmousedown = function() {
+    jumpPlayer = true;
+}
+btnJumpPlayer.onmouseup = function() {
+    jumpPlayer = false;
+}
+btnDownPlayer.onmousedown = function() {
+    downPlayer = true;
+}
+btnDownPlayer.onmouseup = function() {
+    downPlayer = false;
+}
+
+
+btnJumpPlayer.addEventListener('touchstart', function() {
+    jumpPlayer = true;
+});
+btnJumpPlayer.addEventListener('touchend', function() {
+    jumpPlayer = false;
+});
+btnDownPlayer.addEventListener('touchstart', function() {
+    downPlayer = true;
+});
+btnDownPlayer.addEventListener('touchend', function() {
+    downPlayer = false;
+});
+
 
 class Player {
     constructor (x, y, w, h) {
@@ -72,14 +106,14 @@ class Player {
 
     animate(img) {
         // Jump
-        if (keys['Space'] || keys['KeyW']) {
+        if (keys['Space'] || keys['KeyW'] || jumpPlayer) {
             this.jump();
             console.log('jump');
         } else {
             this.jumpTimer = 0;
         }
     
-        if (keys['ShiftLeft'] || keys['KeyS']) {
+        if (keys['ShiftLeft'] || keys['KeyS'] || downPlayer) {
             this.h = this.originalHeight / 2;
         } else {
             this.h = this.originalHeight;
