@@ -12,7 +12,7 @@ const ctx = canvas.getContext('2d');
 canvas.style.height = "";
 canvas.style.width = "";
 canvas.setAttribute('width', 600);
-canvas.setAttribute('height', 350);  
+canvas.setAttribute('height', 300);  
 /**/
 
 // Variables
@@ -98,7 +98,7 @@ class Player {
         this.c = "#FF5858";
 
         this.dy = 0;
-        this.jumpForce = 15;
+        this.jumpForce = 12;
         this.originalHeight = h;
         this.grounded = false;
         this.jumpTimer = 0;
