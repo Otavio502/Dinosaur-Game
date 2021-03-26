@@ -8,12 +8,16 @@ html, body {
 }
 
 #canvas-container {
-    display: grid;
-    grid-template-rows: auto;
-    justify-items: center;
-    align-items: center;
-    margin-top: 10%;
+    display: block;
+    margin-top: 5%;
+    margin-left: 33.33%;
+    margin-right: 33.33%;
+    width: 600px;
  }
+
+ #canvas-container canvas {
+    background-color: #A6A6A6;
+}
 
 #canvas-container p {
     text-align: center;
@@ -22,11 +26,11 @@ html, body {
 }
 #canvas-container h2 {
     text-align: center;
-    font-size: 40px;
+    font-size: 37px;
     color: #1A0B38;
 }
 
-canvas {
-    display: block;
-    background-color: #A6A6A6;
+#btn {
+    float: left;
 }
+
