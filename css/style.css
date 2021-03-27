@@ -1,5 +1,5 @@
 /*
-ps: 09/03/2021 (d/m/y)
+project started: 09/03/2021 (d/m/y)
 */
 
 html, body {
@@ -7,30 +7,53 @@ html, body {
     padding: 0;
 }
 
-#canvas-container {
-    display: block;
+ #game-container {
+    display: grid;
+    margin: 0 auto;
     margin-top: 5%;
-    margin-left: 33.33%;
-    margin-right: 33.33%;
     width: 600px;
  }
 
- #canvas-container canvas {
-    background-color: #A6A6A6;
-}
-
-#canvas-container p {
-    text-align: center;
-    font-size: 22px;
-    color: #1A0B38;
-}
-#canvas-container h2 {
+ #game-header h2 {
     text-align: center;
     font-size: 37px;
     color: #1A0B38;
 }
 
-#btn {
-    float: left;
+#game-main canvas {
+    background-color: #A6A6A6;
+    align-items: center;
 }
 
+#game-footer {
+    display: grid;
+    margin-top: 5%;
+    grid-template-columns: 2fr 9fr;
+    grid-template-rows:  1fr 1fr;
+    grid-template-areas: 
+                        "l1 r1"
+                        "l2 r1";
+}
+
+#game-footer button {
+    color: rgb(28, 26, 58);
+    font-weight: 600;
+    border-radius: 5px;
+    width: 70px;
+    height: 20px;
+}
+
+#game-footer #jumpPlayer {
+    grid-area: l1;
+}
+
+#game-footer #downPlayer {
+    grid-area: l2;
+}
+
+#game-footer p {
+    grid-area: r1;
+    text-align: center;
+    font-size: 18px;
+    color: #1A0B38;
+}
