@@ -1,8 +1,9 @@
 /*
-    App Dinosaur Game
-    By iMarcaos 
-    Project Started: 05/03/2021
-    Version: 0.4-03.21
+App Dinosaur Game
+By iMarcaos (github)
+Project Started: 2021-03-05
+Update: 2023-04-14
+Version: v5-0323
 */
 
 // Canvas
@@ -12,7 +13,7 @@ const ctx = canvas.getContext('2d');
 canvas.style.height = "";
 canvas.style.width = "";
 canvas.setAttribute('width', 600);
-canvas.setAttribute('height', 300);  
+canvas.setAttribute('height', 300);
 /**/
 
 // Variables
@@ -36,10 +37,10 @@ let bImg; // background
 
 // Preload  Images
 function myPreload() {
-    dImg =  myLoadImage('img/dino.png');
-    fImg =  myLoadImage('img/dino-fly.png');
-    cImg =  myLoadImage('img/cactus.png');
-    bImg =  myLoadImage('img/background.png');
+    dImg = myLoadImage('img/dino.png');
+    fImg = myLoadImage('img/dino-fly.png');
+    cImg = myLoadImage('img/cactus.png');
+    bImg = myLoadImage('img/background.png');
 }
 
 function myLoadImage(url) {
@@ -61,36 +62,36 @@ document.addEventListener('keyup', function (evt) {
 let btnJumpPlayer = document.getElementById("jumpPlayer");
 let btnDownPlayer = document.getElementById("downPlayer");
 
-btnJumpPlayer.onmousedown = function() {
+btnJumpPlayer.onmousedown = function () {
     jumpPlayer = true;
 }
-btnJumpPlayer.onmouseup = function() {
+btnJumpPlayer.onmouseup = function () {
     jumpPlayer = false;
 }
-btnDownPlayer.onmousedown = function() {
+btnDownPlayer.onmousedown = function () {
     downPlayer = true;
 }
-btnDownPlayer.onmouseup = function() {
+btnDownPlayer.onmouseup = function () {
     downPlayer = false;
 }
 
 
-btnJumpPlayer.addEventListener('touchstart', function() {
+btnJumpPlayer.addEventListener('touchstart', function () {
     jumpPlayer = true;
 });
-btnJumpPlayer.addEventListener('touchend', function() {
+btnJumpPlayer.addEventListener('touchend', function () {
     jumpPlayer = false;
 });
-btnDownPlayer.addEventListener('touchstart', function() {
+btnDownPlayer.addEventListener('touchstart', function () {
     downPlayer = true;
 });
-btnDownPlayer.addEventListener('touchend', function() {
+btnDownPlayer.addEventListener('touchend', function () {
     downPlayer = false;
 });
 
 
 class Player {
-    constructor (x, y, w, h) {
+    constructor(x, y, w, h) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -112,15 +113,15 @@ class Player {
         } else {
             this.jumpTimer = 0;
         }
-    
+
         if (keys['ShiftLeft'] || keys['KeyS'] || downPlayer) {
             this.h = this.originalHeight / 2;
         } else {
             this.h = this.originalHeight;
         }
-    
+
         this.y += this.dy;
-    
+
         // Gravity
         if (this.y + this.h < canvas.height) {
             this.dy += gravity;
@@ -130,22 +131,22 @@ class Player {
             this.grounded = true;
             this.y = canvas.height - this.h;
         }
-            
+
         // this.draw(); // geometric form
         this.image(img);
     }
 
-    jump(){
+    jump() {
         if (this.grounded && this.jumpTimer == 0) {
             this.jumpTimer = 1;
             this.dy = -this.jumpForce;
-          } else if (this.jumpTimer > 0 && this.jumpTimer < 15) {
+        } else if (this.jumpTimer > 0 && this.jumpTimer < 15) {
             this.jumpTimer++;
             this.dy = -this.jumpForce - (this.jumpTimer / 50);
-          }
+        }
     }
 
-    draw () {
+    draw() {
         ctx.beginPath();
         ctx.fillStyle = this.c;
         ctx.fillRect(this.x, this.y, this.w, this.h);
@@ -160,24 +161,24 @@ class Player {
 }
 
 class Obstacle {
-    constructor (x, y, w, h) {
+    constructor(x, y, w, h) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.c = "#2484E4";
-    
+
         this.dx = -gameSpeed;
     }
 
-    update (img) {
+    update(img) {
         this.x += this.dx;
         //this.draw();
         this.image(img); // test with image 15/03/2021
         this.dx = -gameSpeed;
     }
-    
-    draw () {
+
+    draw() {
         ctx.beginPath();
         ctx.fillStyle = this.c;
         ctx.fillRect(this.x, this.y, this.w, this.h);
@@ -192,7 +193,7 @@ class Obstacle {
 }
 
 class Text {
-    constructor (t, x, y, a, c, s) {
+    constructor(t, x, y, a, c, s) {
         this.t = t; // text
         this.x = x; // position x
         this.y = y; // position y
@@ -200,8 +201,8 @@ class Text {
         this.c = c; // color
         this.s = s; // size
     }
-  
-    draw () {
+
+    draw() {
         ctx.beginPath();
         ctx.fillStyle = this.c;
         ctx.font = this.s + "px sans-serif";
@@ -212,26 +213,26 @@ class Text {
 }
 
 // Game Functions
-function spawnObstacle () {
+function spawnObstacle() {
     let size = randomIntInRange(20, 70); // size of obstacle
     type = randomIntInRange(0, 1); // 0- large obstacle and 1- fly obstacle
     let obstacle = new Obstacle(canvas.width + size, canvas.height - size, size, size);
     //console.log(size);
-  
+
     if (type == 1) {
-      obstacle.y -= player.originalHeight - 10; // fly obstacle height      
+        obstacle.y -= player.originalHeight - 10; // fly obstacle height      
     }
     obstacles.push(obstacle); // push the obtacles to the array    
 }
 //spawnObstacle();
 
 
-function randomIntInRange (min, max) {
+function randomIntInRange(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
 
 
-function start () {
+function start() {
 
     ctx.font = "20px sans-serif";
 
@@ -248,7 +249,7 @@ function start () {
 
     scoreText = new Text("Score: " + score, 25, 25, "left", "#212121", "20");
     highscoreText = new Text("Highscore: " + highscore, canvas.width - 25, 25, "right", "#212121", "20");
-    
+
     requestAnimationFrame(update);
 
     // carrego as imagens do jogo
@@ -267,16 +268,16 @@ function update() {
         spawnObstacle();
         //console.log(obstacles);
         spawnTimer = initialSpawnTimer - gameSpeed * 8;
-        
+
         if (spawnTimer < 60) {
-          spawnTimer = 60;
+            spawnTimer = 60;
         }
     }
 
     // Spawn Enemies
     for (let i = 0; i < obstacles.length; i++) {
         let o = obstacles[i];
-        
+
         if (o.x + o.w < 0) {
             obstacles.splice(i, 1);
         }
@@ -299,7 +300,7 @@ function update() {
         } else {
             o.update(cImg);
         }
-  }
+    }
 
     player.animate(dImg);
 
@@ -310,11 +311,11 @@ function update() {
     if (score > highscore) {
         highscore = score;
         highscoreText.t = "Highscore: " + highscore;
-      }
-      
-      highscoreText.draw();
+    }
 
-      gameSpeed += 0.003;
+    highscoreText.draw();
+
+    gameSpeed += 0.003;
 }
 
 start();
