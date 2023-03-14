@@ -9,7 +9,7 @@ Código em JavaScript, CSS e HTML.
 
 ***
 #### **Imagem da V3 do Dinosaur Game - Jogo do Dinossauro**
-![V3 Dinosaur Game](https://github.com/imarcaos/Dinosaur-Game/blob/master/img/dinosaur-game-marcos-melo-640-v3?raw=true "V3 Dinosaur Game")
+![V3 Dinosaur Game](https://github.com/imarcaos/Dinosaur-Game/blob/master/img/dinosaur-game-marcos-melo-640-v3.jpg?raw=true "V3 Dinosaur Game")
 
 <a href="http://melomarcos.com/dinosaur-game.html" target="_blank">Ver o Dinosaur Game em Funcionamento</a> - brevemente
 
